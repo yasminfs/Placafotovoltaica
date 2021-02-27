@@ -1,0 +1,1 @@
+cm = int(input("Digite o consumo médio presente na conta de luz: "))
