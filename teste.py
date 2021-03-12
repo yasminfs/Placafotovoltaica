@@ -1,3 +1,6 @@
+import numpy as np
+import matplotlib.pyplot as plt
+
 cm = float(input("Digite o consumo médio mensal presente na conta de luz(kWh): "))
 t_l = int(input("Qual o tipo de ligação? Digite: \
                 1 para Monofásico\
@@ -14,8 +17,8 @@ ie = 0.02    # perda por incompatibilidade elétrica 1 a 2 %
 pcc = 0.01   # perda devido aos cabos da corrente contínua
 pca = 0.01   # perda devido aos cabos da corrente alternada
 pi = 0.05     # perda associada ao inversor
-taxa = 0.62     # taxa aneel
-txcemig = 0.618  # tarifa cobrada pela cemig por kWh
+taxa = 0.62     # [%] taxa aneel
+txcemig = 0.618  # [R$] tarifa cobrada pela cemig por kWh
 # informações das placas
 p1 = 235 / 1000           # Placa Solar Canadian Solar - Modelo CS6P 235P \
 # 325 W por placa
@@ -65,5 +68,13 @@ ep = pg3m * txcemig  # economia paineis mensal
 print("Economia mensal: (R$) sem a taxa da ANEEL", ep)
 
 # valor a ser economizado pela geração dos paineis por mes com a taxa da ANEEL
-ep = pg3m * txcemig * 0.62  # economia paineis mensal
+ep = pg3m * txcemig * (1 - 0.62)  # economia paineis mensal
 print("Economia mensal: (R$) com a taxa da ANEEL", ep)
+
+# variando taxa ANEEL
+
+tx_aneel = np.arange(0.00, 0.62, 0.01)
+ep_variavel = pg3m * txcemig * (1 - tx_aneel)
+print(tx_aneel)
+plt.plot(tx_aneel, ep_variavel)
+plt.show()
