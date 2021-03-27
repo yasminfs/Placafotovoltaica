@@ -97,19 +97,35 @@ print("Economia mensal: (R$) com a taxa da ANEEL", ep_2)
 # plt.show()
 
 # valor a ser economizado pela geração dos paineis em 20 anos sem taxa da ANEEL
-ep_anos = ep_1 * 20 * 12 # economia paineis 
-print("Economia em 20 anos: (R$) sem a taxa da ANEEL", ep_anos)
+ep_anos = ep_1 * 25 * 12 # economia paineis 
+print("Economia em 25 anos: (R$) sem a taxa da ANEEL", ep_anos)
 
 # valor a ser economizado pela geração dos paineis por mes com a taxa da ANEEL
-ep_anos2 = ep_2  * 20 * 12  # economia paineis 20 anos
-print("Economia em 20 anos: (R$) com a taxa da ANEEL", ep_anos2)
+ep_anos2 = ep_2  * 25 * 12  # economia paineis 20 anos
+print("Economia em 25 anos: (R$) com a taxa da ANEEL", ep_anos2)
 
 # variando taxa ANEEL
 
 tx_aneel = np.arange(0.00, 0.62, 0.01)
 ep_variavel = pg3m * txcemig * (1 - tx_aneel) * 20 * 12
 
-plt.plot(tx_aneel, ep_variavel)
-plt.hlines(preco_final, 0, 0.62, ["green"])
-plt.show()
+# plt.plot(tx_aneel, ep_variavel)
+# plt.hlines(preco_final, 0, 0.62, ["green"])
+# plt.show()
 
+# eixo x: 25 anos
+# eixo y: valor a ser economizado (taxas:0, 15, 30, 45, 62)
+# eixo y: valor investimento
+
+tempo_anos = np.array(range(0, 26))
+taxas = np.array([0, 0.15, 0.30, 0.45, 0.60])
+for taxa in taxas:
+    valor_economizado = pg3m * txcemig * (1 - taxa) * 12 * tempo_anos
+    plt.plot(tempo_anos, valor_economizado, label="Taxa: " + str(taxa))
+
+plt.hlines(preco_final, 0, 25, ["red"], label="Valor investido (R$)")
+plt.xlabel('Anos')
+plt.ylabel('Valor economizado (R$)')
+plt.title('Placa Fotovoltaica')
+plt.legend()
+plt.show()
