@@ -17,10 +17,10 @@ app.layout = html.Div(children=[
         Insira as entradas abaixo:
     '''),
     html.Div(["Digite o consumo médio mensal presente na conta de luz(kWh): ",
-              dcc.Input(id='consumo', value=40, type='number')]),
+              dcc.Input(id='consumo', value=200, type='number')]),
     html.Br(),
     html.Div(["Digite valor pago com o consumo digitado acima: ",
-              dcc.Input(id='valor_pago', value=100, type='number')]),
+              dcc.Input(id='valor_pago', value=300, type='number')]),
     html.Br(),
     html.Div(["Selecione o tipo de ligação: ",
               dcc.Dropdown(
