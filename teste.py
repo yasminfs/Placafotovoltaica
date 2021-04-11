@@ -120,8 +120,12 @@ ep_variavel = pg3m * txcemig * (1 - tx_aneel) * 20 * 12
 tempo_anos = np.array(range(0, 26))
 taxas = np.array([0, 0.15, 0.30, 0.45, 0.60])
 for taxa in taxas:
-    valor_economizado = pg3m * txcemig * (1 - taxa) * 12 * tempo_anos
+    valor_economizado = pg3m * txcemig * (1 - taxa) * 12 * tempo_anos # np.array
+    # calcular x intersecao
+    x_intersecao = 6.5 # continha (provavelmente funcao do numpy)
     plt.plot(tempo_anos, valor_economizado, label="Taxa: " + str(taxa))
+    # plotar linha vertical na posicao X de intercao de 0 até preco_final
+    plt.vlines(x_intersecao, 0, preco_final, ['green'])
 
 plt.hlines(preco_final, 0, 25, ["red"], label="Valor investido (R$)")
 plt.xlabel('Anos')
